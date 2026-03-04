@@ -114,13 +114,11 @@ run.bat
 
 详细协议内容请参阅 [LICENSE](LICENSE) 文件。
 
-## 致谢
+## 借物表
 
-感谢以下开源项目和工具的支持：
-
-- [FastAPI](https://fastapi.tiangolo.com/) - 高性能的 Python Web 框架
-- [Uvicorn](https://www.uvicorn.org/) - 闪电般的 ASGI 服务器
-- [HarmonyOS Sans](https://developer.harmonyos.com/cn/docs/design/font-0000001157868583) - 优美的中文字体
+- [FastAPI](https://fastapi.tiangolo.com/) - 框架
+- [Uvicorn](https://www.uvicorn.org/) - 服务器
+- [HarmonyOS Sans](https://developer.harmonyos.com/cn/docs/design/font-0000001157868583) - 字体
 - [Microsoft Windows Sound Effects](https://support.microsoft.com/) - 系统音效资源
 
 ---
