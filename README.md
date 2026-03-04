@@ -122,7 +122,3 @@ run.bat
 - [Microsoft Windows Sound Effects](https://support.microsoft.com/) - 系统音效资源
 
 ---
-
-<p align="center">
-  Made by a student who was tired of download speed limits
-</p>
