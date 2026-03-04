@@ -23,15 +23,6 @@
 - **WebSocket 实时同步** - 文件变动即时刷新
 - **现代化 UI** - 简洁美观的界面设计
 
-## 技术栈
-
-| 后端          | 前端                |
-| ----------- | ----------------- |
-| Python 3.8+ | HTML5             |
-| FastAPI     | CSS3              |
-| Uvicorn     | JavaScript (ES6+) |
-| Pydantic    | WebSocket         |
-
 ## 安装与使用
 
 ### 环境要求
