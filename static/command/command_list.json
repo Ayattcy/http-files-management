@@ -1,0 +1,47 @@
+{
+    "commands": [
+        {
+            "name": "help",
+            "format": "/help {command}",
+            "description": "查看指令用法，不带参数显示所有指令",
+            "params": [
+                {
+                    "name": "command",
+                    "description": "要查看用法的指令名称（可选）"
+                }
+            ]
+        },
+        {
+            "name": "lisence",
+            "format": "/lisence {path}",
+            "description": "开源声明相关操作",
+            "params": [
+                {
+                    "name": "show",
+                    "description": "展示简要协议"
+                },
+                {
+                    "name": "failed",
+                    "description": "触发蓝屏"
+                }
+            ]
+        },
+        {
+            "name": "say",
+            "format": "/say <message>",
+            "description": "向服务器输出一段话，显示在服务器输出并保存至日志",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "要发送的消息内容"
+                }
+            ]
+        },
+        {
+            "name": "clear",
+            "format": "/clear",
+            "description": "清理控制台所有输出",
+            "params": []
+        }
+    ]
+}

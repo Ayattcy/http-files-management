@@ -1,0 +1,357 @@
+/**
+ * 上传功能样式
+ */
+
+/* ========== 上传面板 ========== */
+#upload_panel {
+    width: 100%;
+    background: linear-gradient(135deg, rgb(164, 161, 255) 0%, rgb(139, 135, 230) 100%);
+    border-top: 2px solid rgb(80, 88, 112);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px -2px 8px;
+    flex-shrink: 0;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 下沉消失动画 */
+#upload_panel.hiding {
+    animation: slideDown 0.4s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* 全部取消时的变灰效果 */
+#upload_panel.cancelled {
+    background: linear-gradient(135deg, rgb(150, 150, 170) 0%, rgb(130, 130, 150) 100%);
+    animation: slideDown 0.5s ease 0.3s forwards;
+}
+
+/* ========== 进度条 ========== */
+.upload_progress_track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+#upload_progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, rgb(102, 70, 230) 0%, rgb(79, 195, 247) 50%, rgb(102, 70, 230) 100%) 0% 0% / 200% 100%;
+    transition: width 0.3s;
+    animation: progressFlow 3s linear infinite;
+    box-shadow: rgba(79, 195, 247, 0.5) 0px 0px 10px;
+}
+
+@keyframes progressFlow {
+    0% { background-position: 200% 0px; }
+    100% { background-position: -200% 0px; }
+}
+
+/* ========== 上传栏 ========== */
+.upload_bar {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-lg);
+    cursor: pointer;
+    transition: background var(--transition-normal);
+}
+
+.upload_bar:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#upload_current_file {
+    flex: 1 1 0%;
+    color: rgb(255, 255, 255);
+    font-size: var(--font-size-md);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+}
+
+#upload_queue_count {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-xs);
+    background: rgba(0, 0, 0, 0.2);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-lg);
+}
+
+#upload_percent_text {
+    color: rgb(255, 255, 255);
+    font-size: var(--font-size-md);
+    font-weight: bold;
+    min-width: 40px;
+    text-align: right;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+}
+
+#upload_speed_text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-size-xs);
+    min-width: 70px;
+    text-align: right;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+    font-style: italic;
+}
+
+#upload_cancel {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(255, 255, 255);
+    font-size: var(--font-size-md);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#upload_cancel:hover {
+    background: rgba(255, 100, 100, 0.8);
+    transform: scale(1.1);
+}
+
+/* ========== 上传列表模态框 ========== */
+#upload_list_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-upload-modal);
+    justify-content: center;
+    align-items: center;
+}
+
+#upload_list_modal.active {
+    display: flex;
+}
+
+.upload_list_content {
+    width: 500px;
+    max-height: 70vh;
+    background: linear-gradient(135deg, #d2d6e2 0%, #c5c9e0 100%);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.upload_list_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-header);
+    border-bottom: 2px solid var(--border-primary);
+}
+
+.upload_list_header span {
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: var(--font-size-lg);
+}
+
+.upload_list_header button {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: var(--text-primary);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-normal);
+}
+
+.upload_list_header button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#upload_list_body {
+    overflow: auto;
+    max-height: 50vh;
+}
+
+/* ========== 上传列表项 ========== */
+.upload_list_item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid rgba(80, 88, 112, 0.2);
+    font-size: 13px;
+    color: #1a1a2e;
+    position: relative;
+    overflow: hidden;
+    min-height: 44px;
+}
+
+.upload_list_item:last-child {
+    border-bottom: none;
+}
+
+/* 新添加的列表项滑入动画 */
+.upload_list_item.new {
+    animation: slideInRight 0.3s ease forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 状态样式 */
+.upload_list_item.pending {
+    background: transparent;
+}
+
+.upload_list_item.pending .file_status {
+    background: rgba(164, 161, 255, 0.3);
+    color: var(--color-primary);
+}
+
+.upload_list_item.uploading {
+    position: relative;
+    background: linear-gradient(90deg, rgba(102, 70, 230, 0.15) var(--progress, 0%), transparent var(--progress, 0%));
+}
+
+.upload_list_item.uploading .file_status {
+    background: rgba(102, 70, 230, 0.9);
+    color: #fff;
+}
+
+.upload_list_item.done {
+    background: rgba(100, 230, 150, 0.25);
+}
+
+.upload_list_item.done .file_status {
+    background: rgba(46, 125, 50, 0.8);
+    color: #fff;
+}
+
+.upload_list_item.error {
+    background: rgba(255, 100, 100, 0.25);
+}
+
+.upload_list_item.error .file_status {
+    background: rgba(198, 40, 40, 0.8);
+    color: #fff;
+}
+
+.upload_list_item.cancelled {
+    background: rgba(150, 150, 150, 0.2);
+    opacity: 0.7;
+}
+
+.upload_list_item.cancelled .file_status {
+    background: rgba(102, 102, 102, 0.6);
+    color: #fff;
+}
+
+/* 列表项内容 */
+.upload_list_item .item_cancel,
+.upload_list_item .cancel-placeholder {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    margin-right: var(--spacing-md);
+}
+
+.upload_list_item .item_cancel {
+    border: none;
+    background: rgba(255, 80, 80, 0.9);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    z-index: 100;
+}
+
+.upload_list_item .item_cancel:hover {
+    background: rgba(255, 30, 30, 1);
+    box-shadow: 0 2px 8px rgba(255, 50, 50, 0.5);
+}
+
+.upload_list_item .item_cancel:active {
+    background: rgba(200, 0, 0, 1);
+}
+
+.upload_list_item .file_name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    z-index: 50;
+    color: #1a1a2e;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.upload_list_item .file_size {
+    color: #555;
+    margin: 0 var(--spacing-md);
+    min-width: 60px;
+    text-align: right;
+    position: relative;
+    z-index: 50;
+    flex-shrink: 0;
+}
+
+.upload_list_item .file_status {
+    min-width: 60px;
+    text-align: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    position: relative;
+    z-index: 50;
+    font-weight: bold;
+    flex-shrink: 0;
+}

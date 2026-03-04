@@ -1,0 +1,138 @@
+/**
+ * 响应式设计
+ */
+
+/* ========== 平板设备 (1200px 以下) ========== */
+@media (max-width: 1200px) {
+    .text-viewer {
+        width: 700px;
+        height: 500px;
+    }
+}
+
+/* ========== 移动设备 (800px 以下) ========== */
+@media (max-width: 800px) {
+    /* 文本查看器 */
+    .text-viewer {
+        width: 90vw;
+        height: 60vh;
+    }
+
+    /* 预览内容 */
+    #preview_modal img,
+    #preview_modal video {
+        max-width: 95vw;
+        max-height: 60vh;
+        min-width: 280px;
+        min-height: 180px;
+    }
+
+    .video-container {
+        min-height: 180px;
+    }
+
+    /* 缓冲速度显示 */
+    .buffer-speed {
+        font-size: var(--font-size-xs);
+        min-width: 60px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        margin-right: var(--spacing-sm);
+    }
+
+    #preview_title {
+        font-size: var(--font-size-md);
+    }
+
+    /* 上传列表 */
+    .upload_list_content {
+        width: 90vw;
+        max-width: 500px;
+    }
+
+    /* 文件项调整 */
+    .files {
+        width: 160px;
+        height: 170px;
+    }
+
+    .file_icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* 头部调整 */
+    #header {
+        height: 50px;
+    }
+
+    #ser_in {
+        font-size: 16px;
+    }
+
+    /* 面包屑 */
+    .onit, .not_onit {
+        font-size: var(--font-size-lg);
+        height: 22px;
+    }
+}
+
+/* ========== 小屏移动设备 (480px 以下) ========== */
+@media (max-width: 480px) {
+    #nav {
+        width: 70%;
+    }
+
+    #ser {
+        width: 27%;
+    }
+
+    #ser_in {
+        width: 65%;
+    }
+
+    .files {
+        width: 140px;
+        height: 150px;
+    }
+
+    .file_icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* 菜单调整 */
+    #file_menu, #blank_menu {
+        min-width: 120px;
+    }
+
+    .menu_item {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+
+    /* 对话框调整 */
+    #custom_dialog {
+        min-width: 280px;
+        padding: var(--spacing-lg);
+    }
+
+    #custom_dialog_title {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* ========== 暗色模式支持 (可选) ========== */
+@media (prefers-color-scheme: dark) {
+    /* 可以在这里添加暗色模式样式 */
+}
+
+/* ========== 减少动画 (无障碍) ========== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

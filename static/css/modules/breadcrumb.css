@@ -1,0 +1,107 @@
+/**
+ * 面包屑导航样式
+ */
+
+/* ========== 面包屑项基础 ========== */
+.onit, .not_onit {
+    height: var(--breadcrumb-height);
+    min-width: 40px;
+    text-align: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-md);
+    line-height: 19px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+/* 当前项 */
+.onit {
+    border: 1px solid #716897;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--text-light);
+    box-shadow: var(--shadow-sm), var(--shadow-inset);
+}
+
+.onit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25), var(--shadow-inset);
+}
+
+/* 普通项 */
+.not_onit {
+    border: 1px solid var(--border-light);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+    color: #363848;
+    box-shadow: var(--shadow-sm), var(--shadow-inset);
+}
+
+.not_onit:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg), var(--shadow-inset);
+}
+
+/* 箭头图标 */
+.point_icon {
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 var(--spacing-sm);
+    transition: transform var(--transition-normal);
+}
+
+.not_onit:hover .point_icon,
+.onit:hover .point_icon {
+    transform: translateX(2px);
+}
+
+/* 更多按钮 (...) */
+.breadcrumb_more {
+    padding: var(--spacing-xs) var(--spacing-md);
+    min-width: 30px;
+    cursor: pointer;
+    user-select: none;
+    transition: all var(--transition-normal);
+}
+
+.breadcrumb_more:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ========== 面包屑折叠菜单 ========== */
+#breadcrumb_menu {
+    display: none;
+    position: absolute;
+    background: linear-gradient(135deg, #d2d6e2 0%, #c5c9e0 100%);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    min-width: var(--menu-min-width);
+    box-shadow: var(--shadow-xl), var(--shadow-md);
+    z-index: var(--z-menu);
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    animation: menuAppear 0.2s ease forwards;
+    overflow: hidden;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#breadcrumb_menu .menu_item {
+    padding: var(--spacing-md) var(--spacing-lg);
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    transition: all var(--transition-slow);
+    background: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#breadcrumb_menu .menu_item:hover {
+    color: #1a1a2e;
+    background: linear-gradient(135deg, #a4a1ff 0%, #8b87e6 50%, #6646e6 100%);
+}

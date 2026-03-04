@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>远程文件管理</title>
+    <link rel="icon" type="image/x-icon" href="img/icon.png">
+    <link rel="stylesheet" href="css/style.css?v=6" />
+    <style>
+        /* 控制台窗口 */
+        #dev_console {
+            display: none;
+            position: fixed;
+            top: 100px;
+            left: 100px;
+            width: 600px;
+            height: 300px;
+            min-width: 300px;
+            min-height: 200px;
+            background: #1e1e1e;
+            border: 2px solid #0078d7;
+            border-radius: 8px;
+            z-index: 99999;
+            flex-direction: column;
+            font-family: "Consolas", "Monaco", monospace;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            resize: both;
+            overflow: hidden;
+        }
+        #dev_console.active {
+            display: flex;
+        }
+        #dev_console_header {
+            background: #0078d7;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px 6px 0 0;
+            cursor: move;
+            user-select: none;
+        }
+        #dev_console_close {
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        #dev_console_close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        #dev_console_output {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            color: #d4d4d4;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        #dev_console_input_line {
+            display: flex;
+            padding: 8px 10px;
+            border-top: 1px solid #333;
+        }
+        #dev_console_prompt {
+            color: #0078d7;
+            margin-right: 8px;
+            font-size: 13px;
+        }
+        #dev_console_input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #d4d4d4;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+        .console-log { color: #d4d4d4; }
+        .console-error { color: #f48771; }
+        .console-warn { color: #dcdcaa; }
+        .console-success { color: #4ec9b0; }
+
+        /* 指令建议列表 */
+        #dev_console_suggestions {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 10px;
+            right: 10px;
+            max-height: 150px;
+            background: #252526;
+            border: 1px solid #0078d7;
+            border-radius: 4px;
+            overflow-y: auto;
+            z-index: 100000;
+        }
+        #dev_console_suggestions.active {
+            display: block;
+        }
+        .suggestion-item {
+            padding: 6px 10px;
+            color: #d4d4d4;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover,
+        .suggestion-item.selected {
+            background: #0078d7;
+            color: #fff;
+        }
+    </style>
+    <script>
+        // 页面加载完成后初始化控制台
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DevConsole !== 'undefined') {
+                DevConsole.init();
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="main">
+        <!-- 头部导航 -->
+        <div id="header">
+            <div id="nav">
+                <button class="nav_but" id="refresh_btn" title="刷新">
+                    <img src="img/刷新.png" class="nav_icon"/>
+                </button>
+                <div id="nav_body"></div>
+            </div>
+            <div id="ser">
+                <input type="text" id="ser_in" placeholder="搜索..."/>
+                <button type="button" class="ser_but" id="search_btn" title="搜索">
+                    <img src="img/search.png" class="ser_icon"/>
+                </button>
+            </div>
+        </div>
+        <hr>
+
+        <!-- 文件列表区域 -->
+        <div id="body"></div>
+
+        <!-- 上传面板 -->
+        <div id="upload_panel" style="display: none;">
+            <div class="upload_progress_track">
+                <div id="upload_progress"></div>
+            </div>
+            <div class="upload_bar">
+                <span id="upload_current_file">准备上传...</span>
+                <span id="upload_queue_count">0/0</span>
+                <span id="upload_speed_text">0 KB/s</span>
+                <span id="upload_percent_text">0%</span>
+                <button id="upload_cancel" title="全部取消">×</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 隐藏的文件输入 -->
+    <input type="file" id="upload_input" multiple hidden>
+
+    <!-- 文件右键菜单 -->
+    <div id="file_menu">
+        <div class="menu_item" data-action="open">打开</div>
+        <div class="menu_item" data-action="rename">重命名</div>
+        <div class="menu_item" data-action="copy">复制</div>
+        <div class="menu_item" data-action="cut">剪切</div>
+        <div class="menu_item" data-action="delete">删除</div>
+        <div class="menu_item" data-action="download">下载</div>
+    </div>
+
+    <!-- 空白区域右键菜单 -->
+    <div id="blank_menu">
+        <div class="menu_item" data-action="paste">粘贴</div>
+        <div class="menu_item" data-action="mkdir">新建文件夹</div>
+        <div class="menu_item" data-action="upload">上传文件</div>
+        <div class="menu_separator"></div>
+        <div class="menu_item" data-action="sort_name">排序：名称</div>
+        <div class="menu_item" data-action="sort_size">排序：大小</div>
+        <div class="menu_item" data-action="sort_time">排序：修改时间</div>
+        <div class="menu_separator"></div>
+        <div class="menu_item" data-action="refresh">刷新</div>
+    </div>
+
+    <!-- 面包屑折叠菜单 -->
+    <div id="breadcrumb_menu"></div>
+
+    <!-- 预览模态框 -->
+    <div id="preview_modal">
+        <div class="modal_content">
+            <div class="modal_header">
+                <span id="preview_title">预览</span>
+                <span id="preview_buffer_speed" class="buffer-speed"></span>
+                <button class="close-btn" onclick="closePreview()">×</button>
+            </div>
+            <div id="preview_content"></div>
+        </div>
+    </div>
+
+    <!-- 上传列表模态框 -->
+    <div id="upload_list_modal">
+        <div class="upload_list_content">
+            <div class="upload_list_header">
+                <span>上传列表</span>
+                <button onclick="closeUploadList()">×</button>
+            </div>
+            <div id="upload_list_body"></div>
+        </div>
+    </div>
+
+    <!-- 自定义对话框 -->
+    <div id="custom_dialog_overlay" style="display: none;">
+        <div id="custom_dialog">
+            <div id="custom_dialog_title">标题</div>
+            <div id="custom_dialog_message">消息内容</div>
+            <div id="custom_dialog_input_wrapper" style="display: none;">
+                <input type="text" id="custom_dialog_input" />
+            </div>
+            <div id="custom_dialog_buttons">
+                <button id="custom_dialog_cancel">取消</button>
+                <button id="custom_dialog_ok">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 框选框 -->
+    <div id="selection_box"></div>
+
+    <!-- ============================================ -->
+    <!-- 模块加载（按依赖顺序） -->
+    <!-- ============================================ -->
+
+    <!-- 1. 核心状态管理 -->
+    <script src="js/core/state.js"></script>
+
+    <!-- 2. 工具函数 -->
+    <script src="js/modules/utils.js"></script>
+
+    <!-- 3. 错误处理 -->
+    <script src="js/modules/error.js"></script>
+
+    <!-- 4. 服务器通信 -->
+    <script src="js/modules/connection.js"></script>
+
+    <!-- 5. UI 管理 -->
+    <script src="js/modules/ui.js"></script>
+
+    <!-- 6. 功能管理 -->
+    <script src="js/modules/features.js"></script>
+
+    <!-- 7. 上传管理 -->
+    <script src="js/modules/upload.js"></script>
+
+    <!-- 8. 框选功能 -->
+    <script src="js/modules/selection.js"></script>
+
+    <!-- 9. 操作管理 -->
+    <script src="js/modules/operations.js"></script>
+
+    <!-- 10. 开发者控制台 -->
+    <script src="js/modules/console.js"></script>
+
+    <!-- 11. 主入口 -->
+    <script src="js/main.js"></script>
+
+    <!-- 开发者控制台窗口 -->
+    <div id="dev_console">
+        <div id="dev_console_header">
+            <span>控制台</span>
+            <span id="dev_console_close">×</span>
+        </div>
+        <div id="dev_console_output"></div>
+        <div id="dev_console_suggestions"></div>
+        <div id="dev_console_input_line">
+            <span id="dev_console_prompt">></span>
+            <input type="text" id="dev_console_input" placeholder="输入命令..." />
+        </div>
+    </div>
+</body>
+</html>

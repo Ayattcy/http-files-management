@@ -1,0 +1,197 @@
+/**
+ * 布局系统
+ * 主容器、头部、网格布局等
+ */
+
+/* ========== 主容器 ========== */
+#main {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #000;
+    background: linear-gradient(135deg, var(--bg-main-gradient-start) 0%, var(--bg-main-gradient-end) 100%);
+    caret-color: transparent;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* ========== 头部区域 ========== */
+#header {
+    background: var(--bg-header);
+    width: 100%;
+    height: var(--header-height);
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: var(--shadow-md);
+}
+
+/* 分割线 */
+hr {
+    border: 1px solid var(--border-secondary);
+    width: 100%;
+    margin: 0 auto;
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ========== 导航容器 ========== */
+#nav, #ser {
+    display: inline-block;
+}
+
+/* 导航路径 */
+#nav {
+    border: 2px solid var(--border-primary);
+    width: 75%;
+    height: var(--nav-height);
+    border-radius: var(--radius-2xl);
+    position: absolute;
+    top: 13%;
+    left: 1%;
+    overflow: hidden;
+    background: var(--bg-nav);
+    box-shadow: var(--shadow-md), var(--shadow-inset);
+    transition: all var(--transition-normal);
+}
+
+#nav:hover {
+    box-shadow: var(--shadow-lg), var(--shadow-inset);
+}
+
+/* 导航按钮 */
+.nav_but {
+    height: 85%;
+    position: absolute;
+    left: 2px;
+    top: 3px;
+    border: 0 transparent;
+    background-color: transparent;
+    border-right: 1px solid var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.nav_but:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.nav_but:active {
+    transform: scale(0.95);
+}
+
+.nav_icon {
+    height: 100%;
+    transition: transform var(--transition-slow);
+}
+
+.nav_but:hover .nav_icon {
+    transform: rotate(180deg);
+}
+
+/* 导航路径内容 */
+#nav_body {
+    position: absolute;
+    top: 4px;
+    left: 45px;
+    width: calc(90% - 45px);
+    height: 98%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* ========== 搜索框 ========== */
+#ser {
+    border: 2px solid var(--border-primary);
+    width: 22%;
+    height: var(--nav-height);
+    border-radius: var(--radius-2xl);
+    position: absolute;
+    top: 13%;
+    right: 1%;
+    background: var(--bg-nav);
+    box-shadow: var(--shadow-md), var(--shadow-inset);
+    transition: all var(--transition-normal);
+}
+
+#ser:hover {
+    box-shadow: var(--shadow-lg), var(--shadow-inset);
+}
+
+#ser_in {
+    width: 75%;
+    height: 90%;
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    border: transparent;
+    background-color: transparent;
+    outline: none;
+    font-size: 22px;
+    color: var(--text-secondary);
+    caret-color: var(--text-primary);
+    user-select: text;
+    -webkit-user-select: text;
+    transition: all var(--transition-slow);
+}
+
+#ser_in:focus {
+    text-shadow: 0 0 8px rgba(102,70,230,0.3);
+}
+
+.ser_but {
+    height: 85%;
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    border: 0 transparent;
+    background-color: transparent;
+    border-left: 1px solid var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+.ser_but:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.ser_but:active {
+    transform: scale(0.95);
+}
+
+.ser_icon {
+    height: 100%;
+    transition: transform var(--transition-normal);
+}
+
+.ser_but:hover .ser_icon {
+    transform: scale(1.1);
+}
+
+/* ========== 文件列表区域 ========== */
+#body {
+    flex: 1;
+    background: linear-gradient(135deg, var(--bg-main-gradient-start) 0%, var(--bg-main-gradient-end) 100%);
+    overflow: auto;
+    padding: var(--spacing-md);
+    transition: background-color var(--transition-slow);
+    font-size: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--file-item-width), 1fr));
+    gap: var(--spacing-md);
+    align-content: start;
+}
+
+/* 空文件夹提示 */
+#empty {
+    color: var(--text-primary);
+    font-size: var(--font-size-3xl);
+    text-align: center;
+    line-height: 100px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: pulse 2s ease-in-out infinite;
+    grid-column: 1 / -1;
+    width: 100%;
+}

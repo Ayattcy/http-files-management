@@ -1,0 +1,120 @@
+/**
+ * 自定义对话框样式
+ */
+
+/* ========== 对话框遮罩 ========== */
+#custom_dialog_overlay {
+    display: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: var(--z-dialog);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+#custom_dialog_overlay.active {
+    display: flex !important;
+    animation: fadeIn 0.2s ease;
+}
+
+/* ========== 对话框容器 ========== */
+#custom_dialog {
+    background: linear-gradient(135deg, #e8eaf0 0%, #d8dbe5 100%);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    min-width: var(--modal-min-width);
+    max-width: var(--modal-max-width);
+    padding: var(--spacing-2xl);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: dialogPop 0.3s ease;
+}
+
+@keyframes dialogPop {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ========== 对话框内容 ========== */
+#custom_dialog_title {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+#custom_dialog_message {
+    font-size: var(--font-size-md);
+    color: #555;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* ========== 输入框 ========== */
+#custom_dialog_input_wrapper {
+    margin-bottom: var(--spacing-xl);
+}
+
+#custom_dialog_input {
+    width: 100%;
+    padding: 12px var(--spacing-lg);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-md);
+    background: #fff;
+    color: var(--text-primary);
+    outline: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: all var(--transition-normal);
+}
+
+#custom_dialog_input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(102, 70, 230, 0.2);
+}
+
+/* ========== 按钮组 ========== */
+#custom_dialog_buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+}
+
+#custom_dialog_buttons button {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-weight: bold;
+    font-family: inherit;
+}
+
+/* 取消按钮 */
+#custom_dialog_cancel {
+    background: rgba(80, 88, 112, 0.2);
+    color: var(--border-primary);
+}
+
+#custom_dialog_cancel:hover {
+    background: rgba(80, 88, 112, 0.3);
+    transform: translateY(-1px);
+}
+
+/* 确定按钮 */
+#custom_dialog_ok {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    color: var(--text-on-primary);
+}
+
+#custom_dialog_ok:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 70, 230, 0.4);
+}

@@ -1,0 +1,39 @@
+/**
+ * 远程文件管理系统 - 样式主入口
+ * 模块化 CSS 架构
+ * 
+ * 加载顺序（按依赖关系）：
+ * 1. variables.css - CSS 变量定义
+ * 2. base.css - 基础样式和重置
+ * 3. layout.css - 布局系统
+ * 4. breadcrumb.css - 面包屑导航
+ * 5. file-browser.css - 文件浏览
+ * 6. menus.css - 菜单样式
+ * 7. modal.css - 模态框和预览
+ * 8. dialog.css - 对话框
+ * 9. upload.css - 上传功能
+ * 10. responsive.css - 响应式
+ */
+
+/* ========== 核心变量 ========== */
+@import url('modules/variables.css');
+
+/* ========== 基础样式 ========== */
+@import url('modules/base.css');
+
+/* ========== 布局系统 ========== */
+@import url('modules/layout.css');
+
+/* ========== 组件样式 ========== */
+@import url('modules/breadcrumb.css');
+@import url('modules/file-browser.css');
+@import url('modules/menus.css');
+@import url('modules/modal.css');
+@import url('modules/dialog.css');
+@import url('modules/upload.css');
+
+/* ========== 响应式 ========== */
+@import url('modules/responsive.css');
+
+/* ========== 遗留兼容样式（如需） ========== */
+/* 保持空，所有样式已模块化 */

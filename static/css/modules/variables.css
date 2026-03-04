@@ -1,0 +1,96 @@
+/**
+ * CSS 变量定义
+ * 颜色、尺寸、阴影等主题变量
+ */
+
+:root {
+    /* ========== 主色调 ========== */
+    --color-primary: #6646e6;
+    --color-primary-light: #8b87e6;
+    --color-primary-dark: #7a5af0;
+    --color-secondary: #a4a1ff;
+    --color-secondary-light: #c5c2ff;
+    --color-accent: #be62ff;
+    --color-accent-light: #c876ff;
+
+    /* ========== 背景色 ========== */
+    --bg-main: #bfc8ff;
+    --bg-main-gradient-start: #bfc8ff;
+    --bg-main-gradient-end: #b0b9f0;
+    --bg-header: linear-gradient(135deg, #a4a1ff 0%, #8b87e6 100%);
+    --bg-nav: linear-gradient(135deg, #c5c2ff 0%, #b8b5f0 100%);
+    --bg-hover: linear-gradient(135deg, #f0cdff 0%, #afd1f4 100%);
+    --bg-selected: linear-gradient(135deg, #e0d4ff 0%, #c5d8ff 100%);
+
+    /* ========== 文字颜色 ========== */
+    --text-primary: #353a4a;
+    --text-secondary: #434b5f;
+    --text-muted: #666;
+    --text-light: #a2a9d9;
+    --text-on-primary: #ffffff;
+
+    /* ========== 边框颜色 ========== */
+    --border-primary: #505870;
+    --border-secondary: #6c7797;
+    --border-light: #bfb0ff;
+    --border-selected: #6646e6;
+
+    /* ========== 阴影 ========== */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.15);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.15);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.2);
+    --shadow-xl: 0 10px 40px rgba(0,0,0,0.3);
+    --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.3);
+    --shadow-glow: 0 0 0 3px rgba(102,70,230,0.2);
+
+    /* ========== 尺寸 ========== */
+    --header-height: 60px;
+    --nav-height: 70%;
+    --breadcrumb-height: 25px;
+    --file-item-width: 200px;
+    --file-item-height: 210px;
+    --file-icon-size: 130px;
+    --menu-min-width: 140px;
+    --modal-min-width: 320px;
+    --modal-max-width: 480px;
+
+    /* ========== 间距 ========== */
+    --spacing-xs: 2px;
+    --spacing-sm: 5px;
+    --spacing-md: 10px;
+    --spacing-lg: 15px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+
+    /* ========== 圆角 ========== */
+    --radius-sm: 5px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 12px;
+    --radius-2xl: 15px;
+    --radius-full: 50%;
+
+    /* ========== 过渡时间 ========== */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+    --transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* ========== Z-Index 层级 ========== */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-menu: 1000;
+    --z-modal: 2000;
+    --z-upload-modal: 3000;
+    --z-dialog: 10000;
+
+    /* ========== 字体 ========== */
+    --font-family: 'HarmonyOS', 'Microsoft YaHei', sans-serif;
+    --font-size-xs: 11px;
+    --font-size-sm: 12px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 30px;
+}

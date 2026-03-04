@@ -1,0 +1,85 @@
+/**
+ * 菜单样式
+ * 右键菜单、上下文菜单
+ */
+
+/* ========== 菜单基础 ========== */
+#file_menu, #blank_menu {
+    display: none;
+    position: absolute;
+    background: linear-gradient(135deg, #d2d6e2 0%, #c5c9e0 100%);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    min-width: var(--menu-min-width);
+    box-shadow: var(--shadow-xl), var(--shadow-md);
+    z-index: var(--z-menu);
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    animation: menuAppear 0.2s ease forwards;
+    overflow: hidden;
+}
+
+/* 菜单圆角处理 */
+#file_menu .menu_item:first-child,
+#blank_menu .menu_item:first-child {
+    border-radius: 13px 13px 0 0;
+}
+
+#file_menu .menu_item:last-child,
+#blank_menu .menu_item:last-child {
+    border-radius: 0 0 13px 13px;
+}
+
+/* 菜单出现动画 */
+@keyframes menuAppear {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ========== 菜单项 ========== */
+.menu_item {
+    padding: var(--spacing-md) var(--spacing-lg);
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    transition: all var(--transition-slow);
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.menu_item:hover {
+    color: #1a1a2e;
+    background: linear-gradient(135deg, #a4a1ff 0%, #8b87e6 50%, #6646e6 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 0.5s ease forwards;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* 禁用状态 */
+.menu_item.disabled {
+    color: #888;
+    cursor: not-allowed;
+}
+
+.menu_item.disabled:hover {
+    background: transparent;
+    padding-left: var(--spacing-lg);
+}
+
+.menu_item.disabled:hover::before {
+    width: 0;
+}
+
+/* 分隔线 */
+.menu_separator {
+    border-top: 1px solid var(--border-primary);
+    margin: var(--spacing-sm) 0;
+    opacity: 0.5;
+}

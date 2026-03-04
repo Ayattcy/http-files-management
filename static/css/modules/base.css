@@ -1,0 +1,152 @@
+/**
+ * 基础样式
+ * 字体、重置、HTML/Body 基础样式
+ */
+
+/* ========== 字体定义 ========== */
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('../../font/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('../../font/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-display: swap;
+}
+
+/* ========== CSS 重置 ========== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========== 基础 HTML/BODY 样式 ========== */
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+}
+
+/* ========== 选择器样式 ========== */
+::selection {
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+/* ========== 滚动条基础样式 ========== */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #d2d6e2;
+    border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #a4a1ff 0%, #8b87e6 100%);
+    border-radius: var(--radius-md);
+    border: 2px solid #d2d6e2;
+    transition: all var(--transition-normal);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #6646e6 0%, #8b87e6 100%);
+    box-shadow: 0 0 10px rgba(102,70,230,0.5);
+}
+
+/* ========== 通用工具类 ========== */
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.no-drag {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+/* ========== 动画关键帧（基础） ========== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}

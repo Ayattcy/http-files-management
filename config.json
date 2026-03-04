@@ -1,0 +1,10 @@
+{
+    "host": "0.0.0.0",
+    "port": 8000,
+    "root_dir": "home/",
+    "max_bandwidth": "0mb/s",
+    "show_license_notice": true,
+    "license_notice": "本软件基于 GPL-3.0 开源，免费供个人学习使用，严禁销售或转售。作者保留开发扩展功能和增值服务的权利。",
+    "license_notice_en": "This software is open-sourced under GPL-3.0, free for personal learning use. Resale is prohibited. The author reserves the right to develop extended features and value-added services.",
+    "license_error_url": "https://github.com/Ayattcy/http-files-management"
+}
